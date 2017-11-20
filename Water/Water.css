@@ -66,3 +66,9 @@ body{
   animation-name: fishy2;
   animation-duration: 16s;
 }
+#bubbles{
+  position: absolute;
+  background-image: url(giphy.gif);
+  height: 1300px;
+  width: 100%;
+}
