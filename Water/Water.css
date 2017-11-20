@@ -1,0 +1,68 @@
+body{
+  background-color: #84CAE7;
+}
+@keyframes fishy {
+ 0% { top: 50px; left: 50px;}
+ 46% { top: 650px; left: 1200px;}
+ 73% { top: 700px; left: 1300px;}
+ 100% { top: 700px; left: 1310px;}
+}
+#fish{
+  top: 50px;
+  left: 50px;
+  background-image: url(striped_fish_2.gif);
+  position: absolute;
+  height: 200px;
+  width: 284px;
+  animation-name: fishy;
+  animation-duration: 16s;
+}
+@keyframes fishy4 {
+ 0% { top: 560px; left: 0px;}
+ 26% { top: 650px; left: 54px;}
+ 53% { top: 300px; left: 450px;}
+ 68% { top: 800px; left: 700px;}
+ 100% { top: 0px; left: 1310px;}
+}
+#fish4{
+  top: 540px;
+  left: 540px;
+  background-image: url(striped_fish_2.gif);
+  position: absolute;
+  height: 200px;
+  width: 284px;
+  animation-name: fishy4;
+  animation-duration: 16s;
+}
+@keyframes fishy3 {
+ 0% { top: 100px; left: 0px;}
+ 46% { top: 300px; left: 450px;}
+ 60% { top: 400px; left: 600px;}
+ 100% { top: 550px; left: 1310px;}
+}
+#fish3{
+  top: 100px;
+  left: 0px;
+  background-image: url(striped_fish_2.gif);
+  position: absolute;
+  height: 200px;
+  width: 284px;
+  animation-name: fishy3;
+  animation-duration: 16s;
+}
+@keyframes fishy2 {
+ 0% { top: 50px; left: 50px;}
+ 46% { top: 650px; left: 1200px;}
+ 73% { top: 700px; left: 1300px;}
+ 100% { top: 700px; left: 1310px;}
+}
+#fish2{
+  top: 50px;
+  left:0px;
+  background-image: url(striped_fish_2.gif);
+  position: absolute;
+  height: 200px;
+  width: 284px;
+  animation-name: fishy2;
+  animation-duration: 16s;
+}
