@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Balle</title>
+		<meta charset="utf-8">
+		<style type="text/css">
+			body{
+				width: 1024;
+				height: 768;				
+				margin: auto;
+				background: url('background.jpg') center center fixed;
+				overflow: hidden; /* évite d'avoir les barres autour du navigateur */
+				user-select: none; /* désactive le highlight des images quand on clique sur l'écran */
+			}
+			#box{
+				border: 4px solid black;
+				width: 800px;
+				height: 600px;
+				margin:auto;
+				margin-top: 50px;
+				overflow: hidden;					
+				background: linear-gradient(cyan, white);
+			}
+			#ball{
+				height: 80px;
+				width: 80px;
+				position: relative;					
+			}			
+		</style>
+	</head>
+	<body id="corps">
+		<div id="box">
+			<img src="ball.png" id="ball" draggable="false"/>					
+		</div>
+	</body>		
+	<script>
+			let REBONDI = 0.8;
+			let saisie = false;
+			let relache = false;
+			let sourisX = 0;
+			let sourisY = 0;
+			let oldSourisX = 0;
+			let oldSourisY = 0;
+			let startX = 0;
+			let startY = 0;
+			ball.style.left = "350px";
+			ball.style.top = "100px";
+			ball.gauche = 350;
+			ball.haut = 100;
+			ball.vitx = 0;
+			ball.vity = 0;		
+			ball.angle = 0;			
+			ball.onmousedown=saisir;
+			document.onmouseup=lacher;
+			document.onmousemove=bouge;			
+			
+			// Simulation d'une balle
+			function animation()
+			{				
+				if (saisie){
+					ball.gauche = sourisX-box.offsetLeft-ball.clientWidth/2;
+					ball.haut = sourisY-box.offsetTop-ball.clientHeight/2;
+					ball.vity = 0;
+					ball.vitx = 0;
+					oldSourisX = sourisX;
+					oldSourisY = sourisY;
+					relache = true;
+				} else {
+					// Fait tourner la balle en fonction de la vitesseX
+					ball.angle += ball.vitx;					
+					ball.style.transform = "rotate("+ball.angle+"deg)";
+					// Si on relache la souris après avoir tenu la ball on va appliquer une force en fonction de l'ancienne position de la souris et de la nouvelle
+					if (relache){
+						relache = false;
+						// Calcul le delta entre deux position de la souris
+						let deltaX = sourisX - oldSourisX;
+						let deltaY = sourisY - oldSourisY;
+						// Applique ce delta a la vitesse					
+						ball.vity = deltaY;
+						ball.vitx = deltaX;						
+					}
+					// Applique la gravité et le frottement dans l'air
+					ball.vity += 0.09;
+					if (ball.vitx >0 ) 
+						ball.vitx -= 0.001;
+					if (ball.vitx <0 ) 
+						ball.vitx += 0.001;
+					document.title = "vx:"+parseInt(ball.vitx*100)/100+" / vy:"+parseInt(ball.vity*100)/100;
+					// Fait avancer la balle
+					ball.haut += ball.vity;					
+					ball.gauche += ball.vitx;
+					// Si on touche le fond on recoit une vitesse inverse
+					if (ball.haut > box.clientHeight-ball.clientHeight){					
+						ball.vity = -(ball.vity * REBONDI);
+						ball.haut = box.clientHeight-ball.clientHeight;
+						//Applique le frottement sur le fond
+						if (ball.vitx >0 ) 
+							ball.vitx -= 0.002;
+						if (ball.vitx <0 ) 
+							ball.vitx += 0.002;
+					}
+					// Si on touche le haut on recoit une vitesse inverse
+					if (ball.haut < 0){
+						ball.vity = -(ball.vity * REBONDI);
+						ball.haut = 0;						
+					}
+					// Si on touche la bordure droite on recoit une vitesse inverse
+					if (ball.gauche > box.clientWidth-ball.clientWidth){					
+						ball.vitx = -(ball.vitx * REBONDI);
+						ball.gauche = box.clientWidth-ball.clientWidth;
+					}
+					// Si on touche la bordure gauche on recoit une vitesse inverse
+					if (ball.gauche < 0){
+						ball.vitx = -(ball.vitx * REBONDI);
+						ball.gauche = 0;
+					}
+				}
+				ball.style.top = ~~(ball.haut)+"px";	
+				ball.style.left = ~~(ball.gauche)+"px";	
+			}		
+			
+			function bouge(event){
+				sourisX = event.x;
+				sourisY = event.y;				
+			}
+
+			function saisir(event){
+				saisie = true;				
+			}
+			
+			function lacher(event){
+				saisie = false;				
+			}
+			
+			// On déclare un timer qui appel la fonction "animation"
+			let timer = setInterval(animation, 1);
+		</script>
+</html>
