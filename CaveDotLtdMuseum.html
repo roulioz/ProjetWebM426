@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Cave.ltd Museum</title>
+		<style>
+		div{
+			position:absolute;
+			top: 0px;
+			left: 0px;
+		}
+		
+		p{
+			text-align:center;
+		}
+		
+		@keyframes img2{
+			from {left: 0px;}
+			to {left: 241px;}
+		}
+		
+		@keyframes img3{
+			from {left: 0px;}
+			to {left: 482px;}
+		}
+		
+		#div1{
+			z-index:10;
+		}
+		
+		#div2{
+			z-index:11;
+			animation: img2 1s;
+			
+			animation-fill-mode: forwards;
+		}
+		
+		#div3{
+			z-index:12;
+			animation: img3 1s;
+			animation-fill-mode: forwards;
+		}
+		
+		
+		</style>
+	</head>
+	<body>
+		<div id="div1">
+			<img src="http://hg101.kontek.net/dodonpachi/DoDonPachi20.png" alt="Dodonpachi">
+			<p>Dodonpachi, 1997</p>
+		</div>
+		<div id="div2">
+			<img src="http://hg101.kontek.net/mushihimesama/mushihimesama16.png" alt="Mushihimesama">
+			<p>Mushihimesama, 2004</p>
+		</div>
+		<div id="div3">
+			<img src="http://hg101.kontek.net/esprade/Mrs%20Gara%2003.png" alt="ESP Ra.De.">
+			<p>ESP Ra.De., 1998</p>
+		</div>
+	</body>
+</html>
